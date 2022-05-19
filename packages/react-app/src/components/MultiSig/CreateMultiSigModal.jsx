@@ -27,6 +27,8 @@ export default function CreateMultiSigModal({
   const [amount, setAmount] = useState("0");
   const [owners, setOwners] = useState([""]);
 
+  const [name, setName] = useState();
+
   useEffect(() => {
     if (address) {
       setOwners([address, ""]);
@@ -126,7 +128,7 @@ export default function CreateMultiSigModal({
       }
 
       tx(
-        writeContracts[contractName].create(selectedChainId, owners, signaturesRequired, {
+        writeContracts[contractName].create(selectedChainId, owners, signaturesRequired, name, {
           value: ethers.utils.parseEther("" + parseFloat(amount).toFixed(12)),
         }),
         update => {
@@ -195,6 +197,15 @@ export default function CreateMultiSigModal({
             onChange={addMultipleAddress}
             value={multipleAddress}
           /> */}
+
+          <div style={{ width: "90%" }}>
+            <Input
+              style={{ width: "100%" }}
+              placeholder="Name"
+              value={name}
+              onChange={(e)=>{setName(e.target.value)}}
+            />
+          </div>
 
           {owners.map((owner, index) => (
             <div key={index} style={{ display: "flex", gap: "1rem" }}>

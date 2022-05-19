@@ -318,6 +318,7 @@ function App(props) {
   useEffect(() => {
     if (address) {
       let multiSigsForUser = ownersMultiSigEvents.reduce((filtered, createEvent) => {
+
         if (createEvent.args.owners.includes(address) && !filtered.includes(createEvent.args.contractAddress)) {
           filtered.push(createEvent.args.contractAddress);
         }
