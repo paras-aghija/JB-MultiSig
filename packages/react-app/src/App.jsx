@@ -33,7 +33,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, Hints, Subgraph, CreateTransaction, Transactions } from "./views";
+import { Home, Hints, Subgraph, CreateTransaction, Transactions, NewProject } from "./views";
 import { useStaticJsonRPC, useLocalStorage } from "./hooks";
 
 const { Option } = Select;
@@ -641,7 +641,9 @@ function App(props) {
             signaturesRequired={signaturesRequired}
           />
         </Route>
-        <Route path="/createnewproject"></Route>
+        <Route path="/createnewproject">
+          <NewProject address={address} />
+        </Route>
         <Route path="/pool">
           <Transactions
             poolServerUrl={BACKEND_URL}
