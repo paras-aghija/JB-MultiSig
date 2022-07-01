@@ -219,7 +219,7 @@ function App(props) {
     BACKEND_URL = "https://backend.multisig.lol:49899/";
   }
 
-  if(!targetNetwork) targetNetwork = NETWORKS["localhost"];
+  if (!targetNetwork) targetNetwork = NETWORKS["localhost"];
 
   // 🔭 block explorer URL
   const blockExplorer = targetNetwork.blockExplorer;
@@ -395,8 +395,10 @@ function App(props) {
   }, [allOwnerEvents, currentMultiSigAddress]);
 
   useEffect(() => {
-    const filteredEvents = allExecuteTransactionEvents.filter(contractEvent => contractEvent.address === currentMultiSigAddress);
-    const nonceNum = typeof(nonce) === "number" ? nonce : nonce?.toNumber();
+    const filteredEvents = allExecuteTransactionEvents.filter(
+      contractEvent => contractEvent.address === currentMultiSigAddress,
+    );
+    const nonceNum = typeof nonce === "number" ? nonce : nonce?.toNumber();
     if (nonceNum === filteredEvents.length) {
       setExecuteTransactionEvents(filteredEvents.reverse());
     }
@@ -543,7 +545,11 @@ function App(props) {
               isCreateModalVisible={isCreateModalVisible}
               setIsCreateModalVisible={setIsCreateModalVisible}
             />
-            <Select value={[currentMultiSigAddress]} style={{ width: 120, marginRight: 5, }} onChange={handleMultiSigChange}>
+            <Select
+              value={[currentMultiSigAddress]}
+              style={{ width: 120, marginRight: 5 }}
+              onChange={handleMultiSigChange}
+            >
               {multiSigs.map((address, index) => (
                 <Option key={index} value={address}>
                   {address}
@@ -572,6 +578,9 @@ function App(props) {
       >
         <Menu.Item key="/">
           <Link to="/">MultiSig</Link>
+        </Menu.Item>
+        <Menu.Item key="/createnewproject">
+          <Link to="/createnewproject">Add New JB Project</Link>
         </Menu.Item>
         <Menu.Item key="/create">
           <Link to="/create">Propose Transaction</Link>
@@ -632,6 +641,7 @@ function App(props) {
             signaturesRequired={signaturesRequired}
           />
         </Route>
+        <Route path="/createnewproject"></Route>
         <Route path="/pool">
           <Transactions
             poolServerUrl={BACKEND_URL}
